@@ -13,6 +13,13 @@ These priority classes replace the previous inconsistent per-app priority classe
 
 **Note:** `system-cluster-critical` and `system-node-critical` are built-in Kubernetes priority classes and are not included in this chart.
 
+## Priority Order
+
+1. `system-node-critical` (2000001000) - Kubernetes built-in
+2. `system-cluster-critical` (2000000000) - Kubernetes built-in  
+3. `giantswarm-critical` (1000000000) - This chart
+4. `giantswarm-high` (900000000) - This chart
+
 ## Background
 
 See [roadmap issue #3483](https://github.com/giantswarm/roadmap/issues/3483) for the full context and sig-architecture decision.
