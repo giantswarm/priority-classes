@@ -1,0 +1,19 @@
+name: priority-classes
+serviceType: managed
+
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
+
+# Priority class values are fixed as per sig-architecture decision
+# See: https://github.com/giantswarm/roadmap/issues/3483
+priorityClasses:
+  giantswarmCritical:
+    enabled: true
+    value: 1000000000
+    description: "Stuff that the cluster absolutely requires to run and Giant Swarm is adding (e.g., kyverno)"
+  giantswarmHigh:
+    enabled: true
+    value: 900000000
+    description: "Stuff that should preempt customer workloads (e.g., observability components, crossplane)"
+

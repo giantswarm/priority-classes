@@ -1,0 +1,12 @@
+{{- if .Values.priorityClasses.giantswarmHigh.enabled }}
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: giantswarm-high
+  labels:
+    {{- include "priority-classes.labels" . | nindent 4 }}
+value: {{ .Values.priorityClasses.giantswarmHigh.value }}
+globalDefault: false
+description: {{ .Values.priorityClasses.giantswarmHigh.description | quote }}
+{{- end }}
+

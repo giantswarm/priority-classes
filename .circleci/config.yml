@@ -3,20 +3,19 @@ orbs:
   architect: giantswarm/architect@6.8.0
 
 workflows:
-  package-and-push-chart-on-tag:
+  build:
     jobs:
-    - architect/push-to-app-catalog:
-        context: architect
-        executor: app-build-suite
-        name: package-and-push-chart
-        app_catalog: giantswarm-catalog
-        app_catalog_test: giantswarm-test-catalog
-        chart: '{APP-NAME}'
-          # Trigger job on git tag.
-        filters:
-          tags:
-            only: /^v.*/
-          branches:
-            ignore:
-            - main
-            - master
+      - architect/push-to-app-catalog:
+          context: architect
+          name: push-to-app-catalog
+          app_catalog: default-catalog
+          app_catalog_test: default-test-catalog
+          chart: "priority-classes"
+          executor: "app-build-suite"
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore:
+                - main
+                - master

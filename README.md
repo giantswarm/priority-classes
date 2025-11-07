@@ -1,67 +1,59 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/giantswarm/{APP-NAME}/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/giantswarm/{APP-NAME}/tree/main)
+# priority-classes
 
-[Guide about how to manage an app on Giant Swarm](https://handbook.giantswarm.io/docs/dev-and-releng/app-developer-processes/adding_app_to_appcatalog/)
+Helm chart that provides standardized PriorityClass resources for Giant Swarm clusters.
 
-# {APP-NAME} chart
+## Overview
 
-Giant Swarm offers a {APP-NAME} App which can be installed in workload clusters.
-Here, we define the {APP-NAME} chart with its templates and default configuration.
+This chart deploys two PriorityClass resources as defined by sig-architecture:
 
-**What is this app?**
+- **`giantswarm-critical`** (value: 1000000000) - For components that the cluster absolutely requires to run and Giant Swarm is adding (e.g., kyverno)
+- **`giantswarm-high`** (value: 900000000) - For important components that should preempt customer workloads (e.g., observability components, crossplane)
 
-**Why did we add it?**
+These priority classes replace the previous inconsistent per-app priority classes (like `crossplane-critical`, `flux-giantswarm-flux-giantswarm`, `prometheus`) to ensure consistency across all clusters.
 
-**Who can use it?**
+**Note:** `system-cluster-critical` and `system-node-critical` are built-in Kubernetes priority classes and are not included in this chart.
+
+## Background
+
+See [roadmap issue #3483](https://github.com/giantswarm/roadmap/issues/3483) for the full context and sig-architecture decision.
 
 ## Installing
 
-There are several ways to install this app onto a workload cluster.
+This chart is automatically deployed to workload clusters via HelmRelease when enabled in the cluster configuration.
 
-- [Using GitOps to instantiate the App](https://docs.giantswarm.io/tutorials/continuous-deployment/apps/add-appcr/)
-- By creating an [App resource](https://docs.giantswarm.io/reference/platform-api/crd/apps.application.giantswarm.io) using the platform API as explained in [Getting started with App Platform](https://docs.giantswarm.io/tutorials/fleet-management/app-platform/).
-
-## Configuring
+## Configuration
 
 ### values.yaml
 
-**This is an example of a values file you could upload using our web interface.**
+The priority class values are fixed as per sig-architecture decision and should not be changed:
 
 ```yaml
-# values.yaml
-
+priorityClasses:
+  giantswarmCritical:
+    enabled: true
+    value: 1000000000
+    description: "Stuff that the cluster absolutely requires to run and Giant Swarm is adding (e.g., kyverno)"
+  giantswarmHigh:
+    enabled: true
+    value: 900000000
+    description: "Stuff that should preempt customer workloads (e.g., observability components, crossplane)"
 ```
 
-### Sample App CR and ConfigMap for the management cluster
+## Migration
 
-If you have access to the Kubernetes API on the management cluster, you could create the App CR and ConfigMap directly.
+Apps should migrate from legacy priority classes:
 
-Here is an example that would install the app to workload cluster `abc12`:
-
-```yaml
-# appCR.yaml
-
-```
-
-```yaml
-# user-values-configmap.yaml
-
-```
-
-See our [full reference on how to configure apps](https://docs.giantswarm.io/tutorials/fleet-management/app-platform/app-configuration/) for more details.
+| Legacy Priority Class | Value | Replace With |
+|----------------------|-------|--------------|
+| `crossplane-critical` | 600000000 | `giantswarm-high` |
+| `flux-giantswarm-flux-giantswarm` | 1000000000 | `giantswarm-critical` or `giantswarm-high` |
+| `prometheus` | 500000000 | `giantswarm-high` |
 
 ## Compatibility
 
-This app has been tested to work with the following workload cluster release versions:
-
-- _add release version_
-
-## Limitations
-
-Some apps have restrictions on how they can be deployed.
-Not following these limitations will most likely result in a broken deployment.
-
-- _add limitation_
+This chart is designed to work with all Giant Swarm CAPI-based clusters.
 
 ## Credit
 
-- {APP HELM REPOSITORY}
+- Defined by Giant Swarm sig-architecture
+- Reference: https://github.com/giantswarm/roadmap/issues/3483
