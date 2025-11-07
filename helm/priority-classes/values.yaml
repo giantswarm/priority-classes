@@ -1,10 +1,6 @@
 name: priority-classes
 serviceType: managed
 
-project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA ]]"
-
 # Priority class values are fixed as per sig-architecture decision
 # See: https://github.com/giantswarm/roadmap/issues/3483
 priorityClasses:
