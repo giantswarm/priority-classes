@@ -16,4 +16,3 @@ priorityClasses:
     enabled: true
     value: 900000000
     description: "Stuff that should preempt customer workloads (e.g., observability components, crossplane)"
-
