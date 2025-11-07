@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Label now uses chart version instead of app version.
+
+### Removed
+
+- Removed appVersion (only version is used now).
+
 ## [0.2.0] - 2025-11-07
 
 ### Removed
@@ -22,6 +30,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `giantswarm-high` (value: 900000000) for important components that should preempt customer workloads (e.g., observability components, crossplane)
 - Conflict detection using `lookup` to coexist with chart-operator's priority class creation
 
-[Unreleased]: https://github.com/giantswarm/priority-classes/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/giantswarm/priority-classes/compare/v0.1.0...v0.2.0
+[Unreleased]: https://github.com/giantswarm/priority-classes/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/giantswarm/priority-classes/releases/tag/v0.1.0

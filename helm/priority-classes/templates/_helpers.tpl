@@ -27,7 +27,7 @@ Common labels
 {{- define "priority-classes.labels" -}}
 {{ include "priority-classes.selectorLabels" . }}
 application.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-application.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+application.kubernetes.io/version: {{ .Chart.Version | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
 giantswarm.io/service-type: {{ .Values.serviceType }}
 helm.sh/chart: {{ include "priority-classes.chart" . | quote }}
