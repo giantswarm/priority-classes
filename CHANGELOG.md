@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2025-11-07
+
 ### Added
 
 - Initial release with two standardized PriorityClass resources as defined by sig-architecture
@@ -14,4 +16,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `giantswarm-high` (value: 900000000) for important components that should preempt customer workloads (e.g., observability components, crossplane)
 - Conflict detection using `lookup` to coexist with chart-operator's priority class creation
 
-[Unreleased]: https://github.com/giantswarm/priority-classes/tree/main
+[Unreleased]: https://github.com/giantswarm/priority-classes/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/giantswarm/priority-classes/releases/tag/v0.1.0
