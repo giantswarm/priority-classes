@@ -4,13 +4,12 @@ version: 0.1.0
 name: priority-classes
 description: Standardized PriorityClass resources for Giant Swarm clusters, providing giantswarm-critical and giantswarm-high priority levels
 home: https://github.com/giantswarm/priority-classes
-# If you have an icon/logo, you should add it to https://github.com/giantswarm/web-assets
-# and set the final URL as a value here and uncomment.
-#icon: https://s.giantswarm.io/app-icons/priority-classes/1/light.svg
+icon: https://s.giantswarm.io/app-icons/k8s-initiator/1/dark.svg
 sources:
   - https://github.com/giantswarm/priority-classes
 annotations:
   application.giantswarm.io/team: tenet
+  ui.giantswarm.io/logo: https://s.giantswarm.io/app-icons/k8s-initiator/1/dark.svg
 maintainers:
   - name: Team Tenet
     email: team-tenet@giantswarm.io
