@@ -1,4 +1,16 @@
 {{- if .Values.priorityClasses.giantswarmHigh.enabled }}
+{{- $render := false -}}
+{{- $existing := lookup "scheduling.k8s.io/v1" "PriorityClass" "" "giantswarm-high" -}}
+{{- if not $existing -}}
+{{- $render = true -}}
+{{- else -}}
+{{- if $existing.metadata.labels -}}
+{{- if eq (index $existing.metadata.labels "app.kubernetes.io/instance") .Release.Name -}}
+{{- $render = true -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- if $render -}}
 apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
 metadata:
@@ -8,5 +20,6 @@ metadata:
 value: {{ .Values.priorityClasses.giantswarmHigh.value }}
 globalDefault: false
 description: {{ .Values.priorityClasses.giantswarmHigh.description | quote }}
+{{- end -}}
 {{- end }}
 

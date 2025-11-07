@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release with two standardized PriorityClass resources
-- `giantswarm-critical` (value: 1000000000) for cluster-critical Giant Swarm components
-- `giantswarm-high` (value: 900000000) for important components that should preempt customer workloads
+- Initial release with two standardized PriorityClass resources as defined by sig-architecture
+- `giantswarm-critical` (value: 1000000000) for components that the cluster absolutely requires to run and Giant Swarm is adding (e.g., kyverno)
+- `giantswarm-high` (value: 900000000) for important components that should preempt customer workloads (e.g., observability components, crossplane)
+- Conflict detection using `lookup` to coexist with chart-operator's priority class creation
 
 [Unreleased]: https://github.com/giantswarm/priority-classes/tree/main
