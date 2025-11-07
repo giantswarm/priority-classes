@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: 0.1.0
-version: 0.1.0
+version: 0.2.0
 name: priority-classes
 description: Standardized PriorityClass resources for Giant Swarm clusters, providing giantswarm-critical and giantswarm-high priority levels
 home: https://github.com/giantswarm/priority-classes
