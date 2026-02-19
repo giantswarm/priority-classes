@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Sanitize `Chart.Version` used in labels. This is needed because flux apapends the digest to the version using the `+` character which is not allowed in labels.
+
 ## [0.3.0] - 2025-11-07
 
 ### Changed
